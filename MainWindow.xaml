@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="LiveCDKRedeem.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LiveCDKRedeem"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:bean="using:LiveCDKRedeem.Bean"
+    mc:Ignorable="d"
+    Closed="Window_Closed">
+    <!-- 应用Mica材质到应用 -->
+    <Window.SystemBackdrop>
+        <MicaBackdrop Kind="BaseAlt"/>
+    </Window.SystemBackdrop>
+
+
+    <Grid>
+        <Grid.Resources>
+            <DataTemplate x:Key="DebugListView" x:DataType="bean:AccountData">
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                    <Image Width="25" Height="25" Source="/Assets/account.png"/>
+                    <TextBlock Text="{x:Bind displayName,Mode=OneWay}" IsTextSelectionEnabled="True" Width="175" TextTrimming ="CharacterEllipsis"  VerticalAlignment="Center" Margin="10, 0, 20, 0"/>
+                    <Image Width="30" Height="30" Source="/Assets/time.png" Margin="0, 0, 10, 0"/>
+                    <TextBlock Text="{x:Bind expiresAt,Mode=OneWay}" IsTextSelectionEnabled="True" TextTrimming ="CharacterEllipsis" Width="175" VerticalAlignment="Center"/>
+                    <Button Margin="30 0 0 0" HorizontalAlignment="Right" Click="delete_Button_Click" ToolTipService.ToolTip="删除本账号">
+                        <FontIcon Glyph="&#xE74D;" />
+                    </Button>
+                </StackPanel>
+            </DataTemplate>
+        </Grid.Resources>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--  自定义标题栏不能和导航菜单栏一样的颜色请参考下面链接，重写WindowCaptionBackground颜色 -->
+        <!--  https://docs.microsoft.com/zh-CN/windows/apps/develop/title-bar?tabs=winui3#color-and-transparency-in-caption-buttons -->
+        <Grid Grid.Row="0" x:Name="AppTitleBar">
+            <Image Source="Assets/Square44x44Logo.png"
+               HorizontalAlignment="Left" 
+               Width="47" Height="47" 
+               Margin="8,0"/>
+            <TextBlock x:Name="AppTitleTextBlock" Text="绝地求生赛事直播CDK兑换工具"
+                   TextWrapping="NoWrap"
+                   Style="{StaticResource BodyStrongTextBlockStyle}" 
+                   VerticalAlignment="Center"
+                   Margin="55,0,0,0"/>
+        </Grid>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10,0,10,0" VerticalAlignment="Top">
+            <ListView x:Name="AccountsDataListView" 
+                Background="{ThemeResource TextControlBackground}" 
+                ItemTemplate="{StaticResource DebugListView}"
+                ItemsSource="{x:Bind accountViewModel.Accounts,Mode=OneWay}"
+                CornerRadius="8"
+                Height="280"
+                Width="550"
+                BorderThickness="1" >
+            </ListView>
+
+            <RichEditBox x:Name="tbLog" CornerRadius="8" TextWrapping="Wrap" Width="550" Height="450" DataContext="dsdsdsdsfsdf" PlaceholderText="调试日志..." Margin="0,20,0,10"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="添加账号" Click="myButton_ClickAsync" Margin="0,0,30,0"/>
+                    <Button x:Name="startButton" Tag="Stop" Content="启动" Click="startButton_Click" />
+            </StackPanel>
+            <Grid Margin="0,15,0,0">
+                <StackPanel Orientation="Horizontal" ToolTipService.ToolTip="BUG反馈" HorizontalAlignment="Left">
+                    <FontIcon Glyph="&#xEBE8;" Foreground="BurlyWood" Margin="0,0,5,0" />
+                    <TextBlock Text="Hfangyou@gmail.com" IsTextSelectionEnabled="True" TextWrapping="NoWrap" />
+                </StackPanel>
+                <TextBlock x:Name="version_textBlock"  Text="v1.0.1 Beta" HorizontalAlignment="Right" />
+            </Grid>
+        </StackPanel>
+        
+       
+    </Grid>
+</Window>

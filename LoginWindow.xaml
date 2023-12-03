@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="LiveCDKRedeem.LoginWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LiveCDKRedeem"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <!-- 应用Mica材质到应用 -->
+    <Window.SystemBackdrop>
+        <MicaBackdrop Kind="BaseAlt"/>
+    </Window.SystemBackdrop>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--  自定义标题栏不能和导航菜单栏一样的颜色请参考下面链接，重写WindowCaptionBackground颜色 -->
+        <!--  https://docs.microsoft.com/zh-CN/windows/apps/develop/title-bar?tabs=winui3#color-and-transparency-in-caption-buttons -->
+        <Grid Grid.Row="0" x:Name="AppTitleBar">
+            <Image Source="Assets/Square44x44Logo.png"
+           HorizontalAlignment="Left" 
+           Width="47" Height="47" 
+           Margin="8,0"/>
+            <TextBlock x:Name="AppTitleTextBlock" Text="绝地求生赛事直播CDK兑换工具"
+               TextWrapping="NoWrap"
+               Style="{StaticResource BodyStrongTextBlockStyle}" 
+               VerticalAlignment="Center"
+               Margin="55,0,0,0"/>
+        </Grid>
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" KeyDown="LoginView_KeyDown">
+            <TextBlock Text="对暗号" HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBox PlaceholderText="天王盖地虎" MinWidth="400" MaxWidth="500" Margin="0,20,0,20"/>
+            <Button Content="确定" Width="100" HorizontalAlignment="Center" Click="Button_Click"/>
+            <TextBlock Text="暗号只能同时在一台设备上使用" HorizontalAlignment="Center" Margin="0,30,0,0"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

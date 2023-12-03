@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "LiveCDKRedeem (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "LiveCDKRedeem (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
